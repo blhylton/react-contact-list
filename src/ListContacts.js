@@ -25,6 +25,8 @@ class ListContacts extends Component{
             showingContacts = this.props.contacts.filter((contact) => match.test(contact.name));
         }
 
+        showingContacts.sort(sortBy('name'));
+
         return (
             <div className="list-contacts">
                 <div className='list-contacts-top'>
