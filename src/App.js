@@ -27,16 +27,22 @@ class App extends Component {
     screen: 'list'
 
   }
+
   removeContact = (contact) => {
     this.setState((state) => ({
       contacts: state.contacts.filter((c) => c.id !== contact.id)
     }));
   }
+
+  onNavigate = () =>{
+    this.setState({screen: 'create'})
+  }
+
   render() {
     return (
       <div>
         {this.state.screen === 'list' && (
-          <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts}/>
+          <ListContacts onDeleteContact={this.removeContact} onNavigate={this.onNavigate} contacts={this.state.contacts}/>
         )}
         {this.state.screen ==='create' && (
           <CreateContact />
