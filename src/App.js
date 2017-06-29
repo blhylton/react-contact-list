@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import ListContacts from './ListContacts';
 import CreateContact from './createContact';
 
@@ -23,9 +24,7 @@ class App extends Component {
         "email": "tyler@reacttraining.com",
         "avatarURL": "http://localhost:5001/tyler.jpg"
       }
-    ],
-    screen: 'list'
-
+    ]
   }
 
   removeContact = (contact) => {
@@ -34,20 +33,14 @@ class App extends Component {
     }));
   }
 
-  onNavigate = () =>{
-    this.setState({screen: 'create'})
-  }
-
   render() {
     return (
       <div>
-        {this.state.screen === 'list' && (
-          <ListContacts onDeleteContact={this.removeContact} onNavigate={this.onNavigate} contacts={this.state.contacts}/>
-        )}
-        {this.state.screen ==='create' && (
-          <CreateContact />
-        )}
-      
+        <Route path="/" exact render={() => (
+          <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts}/>
+        )} />
+        
+        <Route path="/create" component={CreateContact}/>    
         
       </div>
     );
