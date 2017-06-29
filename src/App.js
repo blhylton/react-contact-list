@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListContacts from './ListContacts';
+import CreateContact from './createContact';
 
 class App extends Component {
   state = {
@@ -22,7 +23,9 @@ class App extends Component {
         "email": "tyler@reacttraining.com",
         "avatarURL": "http://localhost:5001/tyler.jpg"
       }
-    ]
+    ],
+    screen: 'list'
+
   }
   removeContact = (contact) => {
     this.setState((state) => ({
@@ -32,7 +35,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts}/>
+        {this.state.screen === 'list' && (
+          <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts}/>
+        )}
+        {this.state.screen ==='create' && (
+          <CreateContact />
+        )}
+      
+        
       </div>
     );
   }
